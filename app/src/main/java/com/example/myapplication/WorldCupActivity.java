@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.database.DataBaseHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -43,8 +44,8 @@ public class WorldCupActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("SELECT * FROM menu;", null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int totalColumns = cursor.getColumnCount();
-            Log.d("WorldCupActivity","DB select Colums : " + totalColumns);
+            int totalColumns = cursor.getCount();
+            Log.d("WorldCupActivity","DB select Record : " + totalColumns);
 
             randomColumnIndexes = getRandomIndexes(totalColumns, round);
             menuList = new ArrayList<>();
@@ -52,10 +53,12 @@ public class WorldCupActivity extends AppCompatActivity {
             do {
                 MenuInfo menuInfo;
                 for (int index : randomColumnIndexes) {
-                    String menuName = cursor.getColumnName(index);
-                    String imagePath = cursor.getString(index);
-                    menuInfo = new MenuInfo(menuName, imagePath);
-                    menuList.add(menuInfo);
+                    if(cursor.getPosition() == index){
+                        String menuName = cursor.getString(1);
+                        String imagePath = cursor.getString(2);
+                        menuInfo = new MenuInfo(menuName, imagePath);
+                        menuList.add(menuInfo);
+                    }
                 }
             } while (cursor.moveToNext());
             Log.d("WorldCupActivity","Menu information list complete");
@@ -80,6 +83,8 @@ public class WorldCupActivity extends AppCompatActivity {
                 indexes.add(randomIndex);
             }
         }
+        Collections.sort(indexes);
+        Log.d("WorldCupActivity", "random number size : " + indexes.size());
         return indexes;
     }
 

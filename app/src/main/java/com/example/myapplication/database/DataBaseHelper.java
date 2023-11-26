@@ -51,7 +51,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
-        //Toast.makeText(mContext,"onOpen()",Toast.LENGTH_SHORT).show();
         Log.d(TAG,"onOpen() : DB Opening!");
     }
 

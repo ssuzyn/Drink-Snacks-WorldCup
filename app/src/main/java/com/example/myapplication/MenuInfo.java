@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class MenuInfo {
+import java.io.Serializable;
+
+public class MenuInfo implements Serializable {
     private String menuName;
     private String imagePath;
 

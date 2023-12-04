@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,19 +51,29 @@ public class WorldCupActivity extends AppCompatActivity {
 
 
         menuImage1.setOnClickListener(v -> {
-            MenuInfo selectedMenu = menuList.get(0); // 사용자가 선택한 첫 번째 이미지에 해당하는 메뉴
-            worldCupGame.advanceRound(selectedMenu); // WorldCupGame 클래스에서 다음 라운드로 진행하는 메서드 호출
-            updateUI(); // UI 업데이트를 위한 메서드 호출
+            MenuInfo selectedMenu = menuList.get(0);
+            Log.d("clickListener", String.valueOf(selectedMenu.getMenuName()));
+            worldCupGame.advanceRound(selectedMenu);
+            updateMenuList();
+            updateUI();
         });
 
         menuImage2.setOnClickListener(v -> {
-            MenuInfo selectedMenu = menuList.get(1); // 사용자가 선택한 두 번째 이미지에 해당하는 메뉴
-            worldCupGame.advanceRound(selectedMenu); // WorldCupGame 클래스에서 다음 라운드로 진행하는 메서드 호출
-            updateUI(); // UI 업데이트를 위한 메서드 호출
+            MenuInfo selectedMenu = menuList.get(1);
+            Log.d("clickListener", String.valueOf(selectedMenu.getMenuName()));
+            worldCupGame.advanceRound(selectedMenu);
+            updateMenuList();
+            updateUI();
         });
     }
 
+    private void updateMenuList(){
+        menuList.remove(0);
+        menuList.remove(0);
+    }
+
     private void updateUI(){
+
         if (menuList != null && menuList.size() >= 2) {
             MenuInfo menu1 = menuList.get(0);
             MenuInfo menu2 = menuList.get(1);
@@ -81,8 +92,28 @@ public class WorldCupActivity extends AppCompatActivity {
             menuImage2.invalidate();
 
         } else {
-            Log.d("updateUI", "메뉴 리스트가 비어있거나 메뉴가 하나 이하 입니다.");
+            menuList = worldCupGame.prepareNextRound();
+
+            if(menuList.size() == 1){
+                moveToNextActivity(menuList.get(0));
+                Log.d("updateUI", "안주 월드컵 경기 끝");
+            }
+
+            if (menuList != null && !menuList.isEmpty()) {
+                Log.d("updateUI", String.valueOf(menuList.size()));
+                Log.d("updateUI", "다음 라운드 진행 준비 완료");
+                updateUI();
+            } else {
+                Log.d("updateUI", "메뉴 목록이 비어있음");
+            }
         }
     }
+
+    private void moveToNextActivity(MenuInfo winningMenu){
+        Intent intent = new Intent(WorldCupActivity.this, ChampionshipActivity.class);
+        intent.putExtra("WinningMenu", winningMenu);
+        startActivity(intent);
+    }
+
 
 }

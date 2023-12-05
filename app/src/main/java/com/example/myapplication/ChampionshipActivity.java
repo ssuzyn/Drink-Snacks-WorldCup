@@ -32,7 +32,7 @@ public class ChampionshipActivity extends AppCompatActivity {
         }
 
         btnBarList.setOnClickListener(view -> {
-            Intent intent = new Intent(ChampionshipActivity.this, BarListActivity.class);
+            Intent intent = new Intent(ChampionshipActivity.this, LocationActivity.class);
             intent.putExtra("menu", winningMenu.getMenuName());
             startActivity(intent);
         });

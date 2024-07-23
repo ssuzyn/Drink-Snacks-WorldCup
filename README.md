@@ -10,11 +10,16 @@
 
 술안주 월드컵은 16강, 8강, 4강 이렇게 세 가지 라운드 중에 하나를 선택할 수 있다.
 
+<img width="965" alt="image" src="https://github.com/user-attachments/assets/48d0dea9-c8a3-47ab-9c8e-8e8caf40b709">
+
+
 <br>
 
 ## 🎨 UI 디자인
-![](https://velog.velcdn.com/images/ssuzyn/post/58d71656-c685-43e2-9649-3af86d6100b4/image.png)
-![](https://velog.velcdn.com/images/ssuzyn/post/a7751057-6200-4966-8f90-84843412a08b/image.png)
+<img width="962" alt="image" src="https://github.com/user-attachments/assets/81ad552d-e0f5-49bd-9551-e50d4dff20ac">
+
+<img width="965" alt="image" src="https://github.com/user-attachments/assets/55835d00-d33e-491b-8074-8bad2b248905">
+
 
 <br>
 
